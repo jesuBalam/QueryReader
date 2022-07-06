@@ -1,0 +1,10 @@
+E:\Developer\Hiuman\C#\XmlData\QueryReader\QueryReader\QueryReader\bin\Debug\QueryReader.exe.config
+E:\Developer\Hiuman\C#\XmlData\QueryReader\QueryReader\QueryReader\bin\Debug\QueryReader.exe
+E:\Developer\Hiuman\C#\XmlData\QueryReader\QueryReader\QueryReader\bin\Debug\QueryReader.pdb
+E:\Developer\Hiuman\C#\XmlData\QueryReader\QueryReader\QueryReader\bin\Debug\DocumentFormat.OpenXml.dll
+E:\Developer\Hiuman\C#\XmlData\QueryReader\QueryReader\QueryReader\bin\Debug\DocumentFormat.OpenXml.xml
+E:\Developer\Hiuman\C#\XmlData\QueryReader\QueryReader\QueryReader\obj\Debug\QueryReader.csprojAssemblyReference.cache
+E:\Developer\Hiuman\C#\XmlData\QueryReader\QueryReader\QueryReader\obj\Debug\QueryReader.csproj.CoreCompileInputs.cache
+E:\Developer\Hiuman\C#\XmlData\QueryReader\QueryReader\QueryReader\obj\Debug\QueryReader.csproj.CopyComplete
+E:\Developer\Hiuman\C#\XmlData\QueryReader\QueryReader\QueryReader\obj\Debug\QueryReader.exe
+E:\Developer\Hiuman\C#\XmlData\QueryReader\QueryReader\QueryReader\obj\Debug\QueryReader.pdb
