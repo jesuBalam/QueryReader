@@ -80,8 +80,8 @@ namespace QueryReader
 
                     Row headerRow = new Row();
 
-                    List<String> columns = new List<string>();
-                    foreach (System.Data.DataColumn column in table.Columns)
+                    List<string> columns = new List<string>();
+                    foreach (DataColumn column in table.Columns)
                     {
                         columns.Add(column.ColumnName);
 
@@ -96,7 +96,7 @@ namespace QueryReader
                     foreach (DataRow dsrow in table.Rows)
                     {
                         Row newRow = new Row();
-                        foreach (String col in columns)
+                        foreach (string col in columns)
                         {
                             Cell cell = new Cell();
                             cell.DataType = CellValues.String;
