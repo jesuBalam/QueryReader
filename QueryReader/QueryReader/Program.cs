@@ -16,6 +16,7 @@ namespace QueryReader
                 Console.WriteLine("Press any key to start.");
                 Console.ReadKey();
 
+                #region Execute querys from file
                 Console.WriteLine("Paste file path to read: (Space/Enter to take default path in config)");
                 string pathFile = Console.ReadLine();
                 pathFile.Trim();
@@ -25,10 +26,9 @@ namespace QueryReader
                     ConfigurationManager.AppSettings["FileInput"] = pathFile;
                 }
                 QueryReader.ReadFile(@ConfigurationManager.AppSettings["FileInput"]);
-                Console.WriteLine("Process Done.");
-                Console.ReadKey();
+                #endregion                
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e);
                 Console.WriteLine("Press any key to exit.");

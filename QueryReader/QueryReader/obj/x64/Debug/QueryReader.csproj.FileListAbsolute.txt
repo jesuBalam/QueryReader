@@ -1,0 +1,12 @@
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\x64\Debug\QueryReader.exe.config
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\x64\Debug\QueryReader.exe
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\x64\Debug\QueryReader.pdb
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\x64\Debug\DocumentFormat.OpenXml.dll
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\x64\Debug\DocumentFormat.OpenXml.xml
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\obj\x64\Debug\QueryReader.csproj.ResolveComReference.cache
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\obj\x64\Debug\QueryReader.csproj.CoreCompileInputs.cache
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\obj\x64\Debug\QueryReader.csproj.CopyComplete
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\obj\x64\Debug\QueryReader.exe
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\obj\x64\Debug\QueryReader.pdb
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\obj\x64\Debug\QueryReader.csprojAssemblyReference.cache
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\obj\x64\Debug\Interop.Office.dll
