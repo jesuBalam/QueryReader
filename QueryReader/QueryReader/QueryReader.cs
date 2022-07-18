@@ -62,8 +62,17 @@ namespace QueryReader
                 pathFile = pathFile.Remove(pathFile.Length-1,1) + indexFile;
                 ConfigurationManager.AppSettings["FileOutput"] = pathFile;
                 indexFile++;
-            }                
-            WriteExcelFile(@ConfigurationManager.AppSettings["FileOutput"]+".xlsx", dataTables);
+            }
+            Console.WriteLine("Choose output (t: txt file, e: excel file)");
+            var response = Console.ReadKey();
+            if(response.Key == ConsoleKey.T)
+            {
+                WriteTxtFile(dataTables);
+            }else
+            {
+                WriteExcelFile(@ConfigurationManager.AppSettings["FileOutput"] + ".xlsx", dataTables);
+            }            
+            
             connection.Close();
         }
 
@@ -145,6 +154,34 @@ namespace QueryReader
 
             //workbookPart.Workbook.Save();
             //}
+        }
+
+
+        private static void WriteTxtFile(List<DataTable> tables)
+        {
+            foreach (var table in tables)
+            {
+                while (File.Exists(@ConfigurationManager.AppSettings["FileOutput"] + ".txt"))
+                {
+                    string pathFile = ConfigurationManager.AppSettings["FileOutput"];
+                    pathFile = pathFile.Remove(pathFile.Length - 1, 1) + indexFile;
+                    ConfigurationManager.AppSettings["FileOutput"] = pathFile;
+                    indexFile++;
+                }
+                using (StreamWriter sw = File.CreateText(@ConfigurationManager.AppSettings["FileOutput"] + ".txt"))
+                {
+                    string columns = "";
+                    foreach(DataColumn col in table.Columns)
+                    {
+                        columns += col + " || ";
+                    }
+                    sw.WriteLine(columns);
+                    foreach (DataRow row in table.Rows)
+                    {
+                        sw.WriteLine(String.Join(" || ", row.ItemArray));
+                    }
+                }
+            }
         }
     }
 }
