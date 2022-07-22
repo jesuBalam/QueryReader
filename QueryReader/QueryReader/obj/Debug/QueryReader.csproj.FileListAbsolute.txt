@@ -20,3 +20,6 @@ E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReade
 E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\obj\Debug\QueryReader.pdb
 E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\obj\Debug\QueryReader.csproj.ResolveComReference.cache
 E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\obj\Debug\Interop.Office.dll
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\Debug\BouncyCastle.Crypto.dll
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\Debug\GemBox.Spreadsheet.dll
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\Debug\GemBox.Spreadsheet.xml

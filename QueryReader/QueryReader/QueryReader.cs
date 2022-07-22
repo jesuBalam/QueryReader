@@ -12,6 +12,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks; 
 using System.Runtime.InteropServices;
+using GemBox.Spreadsheet;
 
 
 namespace QueryReader
@@ -22,10 +23,7 @@ namespace QueryReader
         public static int indexFile = 1;
         public static List<DataTable> dataTables = new List<DataTable>();
 
-        public static Microsoft.Office.Interop.Excel.Application xlApp;
-        public static Microsoft.Office.Interop.Excel.Workbook worKbooK;
-        public static Microsoft.Office.Interop.Excel.Worksheet worKsheeT;
-        public static Microsoft.Office.Interop.Excel.Range celLrangE;
+       
         public static void ReadFile(string path)
         {
             
@@ -56,7 +54,9 @@ namespace QueryReader
                     }
                 }
             }
-            while(File.Exists(@ConfigurationManager.AppSettings["FileOutput"]+".xlsx"))
+            connection.Close();
+
+            while (File.Exists(@ConfigurationManager.AppSettings["FileOutput"]+".xlsx"))
             {
                 string pathFile = ConfigurationManager.AppSettings["FileOutput"];
                 pathFile = pathFile.Remove(pathFile.Length-1,1) + indexFile;
@@ -71,30 +71,46 @@ namespace QueryReader
             }else
             {
                 WriteExcelFile(@ConfigurationManager.AppSettings["FileOutput"] + ".xlsx", dataTables);
-            }            
+            }
+            Console.WriteLine("Process Done. press any key to exit");
+            Console.ReadKey();
             
-            connection.Close();
         }
-
+        #region GemBox
         private static void WriteExcelFile(string path, List<DataTable> tables)
         {
-            Console.WriteLine("Writing file");
+            Console.WriteLine("Writing file");           
+            SpreadsheetInfo.SetLicense("FREE-LIMITED-KEY");
+            var workbook = new ExcelFile();
+            foreach (var table in tables)
+            {
+                var worksheet = workbook.Worksheets.Add("Sheet" + indexSheet);
+                worksheet.InsertDataTable(table, new InsertDataTableOptions() {
+                    ColumnHeaders = true,
+                    StartRow = 0,
+                });                
+                indexSheet++;
+            }
+            workbook.Save(path);
+        }
+        #endregion
+
+        #region Excel Interop
+        private static void WriteExcelFileInterop(string path, List<DataTable> tables)
+        {
+            Microsoft.Office.Interop.Excel.Application xlApp;
+            Microsoft.Office.Interop.Excel.Workbook worKbooK;
+            Microsoft.Office.Interop.Excel.Worksheet worKsheeT;
+            Microsoft.Office.Interop.Excel.Range celLrangE;
+
             xlApp = new Microsoft.Office.Interop.Excel.Application();
             worKbooK = xlApp.Workbooks.Add(Type.Missing);
 
-
-
-            //using (SpreadsheetDocument document = SpreadsheetDocument.Create(path, SpreadsheetDocumentType.Workbook))
-            //{
-            //WorkbookPart workbookPart = document.AddWorkbookPart();
-            //workbookPart.Workbook = new Workbook();
-
             foreach (var table in tables)
-            {
-                #region Excel
+            {  
                 worKsheeT = (Microsoft.Office.Interop.Excel.Worksheet)worKbooK.Worksheets.Add();
                 worKsheeT.Name = "Sheet" + indexSheet;
-                //worKsheeT = (Microsoft.Office.Interop.Excel.Worksheet)worKbooK.ActiveSheet; worKsheeT.Name = "Sheet" + indexSheet;
+                worKsheeT = (Microsoft.Office.Interop.Excel.Worksheet)worKbooK.ActiveSheet; worKsheeT.Name = "Sheet" + indexSheet;
                 for (int col = 1; col < table.Columns.Count + 1; col++)
                 {
                     worKsheeT.Cells[1, col] = table.Columns[col - 1].ColumnName;
@@ -104,58 +120,71 @@ namespace QueryReader
                     }
                 }
                 indexSheet++;
-                #endregion
-
-                #region OpenXML (alternative)
-                //WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
-                //var sheetData = new SheetData();
-                //worksheetPart.Worksheet = new Worksheet(sheetData);
-
-                //Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
-                //Sheet sheet = new Sheet()
-                //{ Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = Convert.ToUInt32(indexSheet), Name = "Sheet" + indexSheet };
-
-                //sheets.Append(sheet);
-                //indexSheet++;
-
-                //Row headerRow = new Row();
-
-                //List<string> columns = new List<string>();
-                //foreach (DataColumn column in table.Columns)
-                //{
-                //    columns.Add(column.ColumnName);
-
-                //    Cell cell = new Cell();
-                //    cell.DataType = CellValues.String;
-                //    cell.CellValue = new CellValue(column.ColumnName);
-                //    headerRow.AppendChild(cell);
-                //}
-
-                //sheetData.AppendChild(headerRow);
-
-                //foreach (DataRow dsrow in table.Rows)
-                //{
-                //    Row newRow = new Row();
-                //    foreach (string col in columns)
-                //    {
-                //        Cell cell = new Cell();
-                //        cell.DataType = CellValues.String;
-                //        cell.CellValue = new CellValue(dsrow[col].ToString());
-                //        newRow.AppendChild(cell);
-                //    }
-
-                //    sheetData.AppendChild(newRow);
-                //}
-                #endregion
             }
+
             worKbooK.SaveAs(path); ;
             worKbooK.Close();
             xlApp.Quit();
-
-            //workbookPart.Workbook.Save();
-            //}
         }
+        #endregion
 
+        #region OpenXML (alternative)
+        private static void WriteExcelOpenXml(string path, List<DataTable> tables)
+        {
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(path, SpreadsheetDocumentType.Workbook))
+            {
+                WorkbookPart workbookPart = document.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                foreach(var table in tables)
+                {
+                    WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                    var sheetData = new SheetData();
+                    worksheetPart.Worksheet = new Worksheet(sheetData);
+
+                    Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+                    Sheet sheet = new Sheet()
+                    { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = Convert.ToUInt32(indexSheet), Name = "Sheet" + indexSheet };
+
+                    sheets.Append(sheet);
+                    indexSheet++;
+
+                    Row headerRow = new Row();
+
+                    List<string> columns = new List<string>();
+                    foreach (DataColumn column in table.Columns)
+                    {
+                        columns.Add(column.ColumnName);
+
+                        Cell cell = new Cell();
+                        cell.DataType = CellValues.String;
+                        cell.CellValue = new CellValue(column.ColumnName);
+                        headerRow.AppendChild(cell);
+                    }
+
+                    sheetData.AppendChild(headerRow);
+
+                    foreach (DataRow dsrow in table.Rows)
+                    {
+                        Row newRow = new Row();
+                        foreach (string col in columns)
+                        {
+                            Cell cell = new Cell();
+                            cell.DataType = CellValues.String;
+                            cell.CellValue = new CellValue(dsrow[col].ToString());
+                            newRow.AppendChild(cell);
+                        }
+
+                        sheetData.AppendChild(newRow);
+                    }
+                }
+               
+               
+                workbookPart.Workbook.Save();
+            }
+
+        }
+            #endregion
 
         private static void WriteTxtFile(List<DataTable> tables)
         {
