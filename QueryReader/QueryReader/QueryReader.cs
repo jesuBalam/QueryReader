@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using GemBox.Spreadsheet;
 using ClosedXML.Excel;
+using OfficeOpenXml;
 
 namespace QueryReader
 {
@@ -71,12 +72,30 @@ namespace QueryReader
                 WriteTxtFile(dataTables);
             }else
             {
-                WriteExcelFileClosed(@ConfigurationManager.AppSettings["FileOutput"] + ".xlsx", dataTables);
+                WriteExcelFileEPPLUS(@ConfigurationManager.AppSettings["FileOutput"] + ".xlsx", dataTables);
             }
             Console.WriteLine("Process Done. press any key to exit");
             Console.ReadKey();
             
         }
+
+        #region EPPLUS
+        private static void WriteExcelFileEPPLUS(string path, List<DataTable> tables)
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            using (ExcelPackage pck = new ExcelPackage(path))
+            {
+                foreach (var table in tables)
+                {
+                    OfficeOpenXml.ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Sheet" + indexSheet);
+                    ws.Cells["A1"].LoadFromDataTable(table, true);
+                    indexSheet++;
+                }
+                    
+                pck.Save();
+            }
+        }
+        #endregion
 
         #region ClosedXML
         private static void WriteExcelFileClosed(string path, List<DataTable> tables)

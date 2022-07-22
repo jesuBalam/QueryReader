@@ -28,3 +28,7 @@ E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReade
 E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\Debug\ClosedXML.pdb
 E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\Debug\ClosedXML.xml
 E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\Debug\ExcelNumberFormat.xml
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\Debug\EPPlus.dll
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\Debug\EPPlus.Interfaces.dll
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\Debug\EPPlus.System.Drawing.dll
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\Debug\EPPlus.xml
