@@ -13,7 +13,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks; 
 using System.Runtime.InteropServices;
 using GemBox.Spreadsheet;
-
+using ClosedXML.Excel;
 
 namespace QueryReader
 {
@@ -35,7 +35,8 @@ namespace QueryReader
             Console.WriteLine("Reading data");
             IEnumerable<string> commandStrings = Regex.Split(script, regexSemicolon, RegexOptions.Multiline | RegexOptions.IgnoreCase);
             Console.WriteLine("Executing querys");
-            SqlConnection connection = new SqlConnection(string.Format("Data Source={0};database={1}; User ID={2};Password={3}", ConfigurationManager.AppSettings["ServerDatabase"], ConfigurationManager.AppSettings["Database"], ConfigurationManager.AppSettings["User"], ConfigurationManager.AppSettings["Pass"]));
+            //Integrated Security=SSPI;
+            SqlConnection connection = new SqlConnection(string.Format("Data Source={0};database={1};Integrated Security=SSPI; User ID={2};Password={3}", ConfigurationManager.AppSettings["ServerDatabase"], ConfigurationManager.AppSettings["Database"], ConfigurationManager.AppSettings["User"], ConfigurationManager.AppSettings["Pass"]));
             connection.Open();
             foreach (string commandString in commandStrings)
             {                
@@ -70,12 +71,28 @@ namespace QueryReader
                 WriteTxtFile(dataTables);
             }else
             {
-                WriteExcelFile(@ConfigurationManager.AppSettings["FileOutput"] + ".xlsx", dataTables);
+                WriteExcelFileClosed(@ConfigurationManager.AppSettings["FileOutput"] + ".xlsx", dataTables);
             }
             Console.WriteLine("Process Done. press any key to exit");
             Console.ReadKey();
             
         }
+
+        #region ClosedXML
+        private static void WriteExcelFileClosed(string path, List<DataTable> tables)
+        {
+            Console.WriteLine("Writing file");
+            XLWorkbook workbook = new XLWorkbook();
+            foreach(var table in tables)
+            {
+                workbook.Worksheets.Add(table, "Sheet" + indexSheet);                
+                indexSheet++;
+            }
+            workbook.SaveAs(path);
+        }
+        #endregion
+
+
         #region GemBox
         private static void WriteExcelFile(string path, List<DataTable> tables)
         {

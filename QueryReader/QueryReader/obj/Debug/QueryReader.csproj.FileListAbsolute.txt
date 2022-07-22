@@ -23,3 +23,8 @@ E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReade
 E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\Debug\BouncyCastle.Crypto.dll
 E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\Debug\GemBox.Spreadsheet.dll
 E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\Debug\GemBox.Spreadsheet.xml
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\Debug\ClosedXML.dll
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\Debug\ExcelNumberFormat.dll
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\Debug\ClosedXML.pdb
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\Debug\ClosedXML.xml
+E:\Developer\Hiuman\C#\XmlData\QueryReaderGit\QueryReader\QueryReader\QueryReader\bin\Debug\ExcelNumberFormat.xml
