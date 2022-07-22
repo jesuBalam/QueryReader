@@ -83,16 +83,16 @@ namespace QueryReader
         private static void WriteExcelFileEPPLUS(string path, List<DataTable> tables)
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            using (ExcelPackage pck = new ExcelPackage(path))
+            using (ExcelPackage package = new ExcelPackage(path))
             {
                 foreach (var table in tables)
                 {
-                    OfficeOpenXml.ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Sheet" + indexSheet);
-                    ws.Cells["A1"].LoadFromDataTable(table, true);
+                    OfficeOpenXml.ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Sheet" + indexSheet);
+                    worksheet.Cells["A1"].LoadFromDataTable(table, true);
                     indexSheet++;
                 }
-                    
-                pck.Save();
+
+                package.Save();
             }
         }
         #endregion
